@@ -41,7 +41,6 @@ body {
 }
 
 .firstCard {
-  /* width: calc(28% - 20px); Adjust the width according to your needs */
   width: 350px;
   margin: 10px;
   padding: 10px;
@@ -54,7 +53,6 @@ body {
 }
 
 .photo img {
-  /* size: inherit; */
   width: 95%;
   height: 250px;
   margin: 10px;
@@ -67,7 +65,6 @@ body {
   margin: 10px 25px -7px 20px;
 }
 .year {
-  /* padding-top: 4px; */
   border: 2px dashed rgb(110, 173, 207);
   border-radius: 8px;
   height: 15px;
@@ -145,7 +142,6 @@ button {
   margin: 0 8px;
   background-color: azure;
   color: rgb(8, 8, 8);
-  /* border: 1px solid #4caf50; */
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border 0.3s;
@@ -162,12 +158,10 @@ button {
   border: 1px solid #4caf50;
 }
 
-/* Optional: Add box-shadow for a subtle elevation effect */
 .btn {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: Adjust margin and padding for smaller screens */
 @media (max-width: 768px) {
   .btn {
     margin: 5px;

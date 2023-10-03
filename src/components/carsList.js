@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./style/style.css";
 import CarsFooter from "./carsFooter";
-import { useNavigate, useParams } from "react-router-dom";
 import carsData from "./carsapi.js";
 
-const CarsList = () => {
+const CarsList = ({
+  currentPage,
+  setCurrentPage,
+  itemsPerPage,
+  searchQuery,
+}) => {
   const [carData, setCarData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const navigate = useNavigate();
-
-  const { pageNumber } = useParams();
-
-  // Set currentPage state based on URL params when the component mounts
-  useEffect(() => {
-    if (pageNumber && !isNaN(pageNumber)) {
-      setCurrentPage(parseInt(pageNumber));
-    }
-  }, [pageNumber]);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,21 +25,27 @@ const CarsList = () => {
     fetchData();
   }, []);
 
-  // const totalPages = Math.ceil(carData.length / itemsPerPage);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    navigate(`/${newPage}`); // Change URL to match the new page number
-  };
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set("page", `${currentPage}`);
+    window.history.pushState({}, "", currentUrl);
+  }, [currentPage, setCurrentPage]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = carData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const filteredData = carData.filter((car) =>
+    car.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const itemsToDisplay = searchQuery
+    ? filteredData.slice(indexOfFirstItem, indexOfLastItem)
+    : carData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <>
       <section className="cards">
-        {currentItems.map((car, index) => (
+        {itemsToDisplay.map((car, index) => (
           <div className="firstrow" key={index}>
             {/* Image starts here */}
             <div className="firstCard">
@@ -131,9 +130,8 @@ const CarsList = () => {
       <CarsFooter
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
-        totalItems={carData.length}
+        totalItems={searchQuery ? filteredData.length : carData.length}
         setCurrentPage={setCurrentPage}
-        onPageChange={handlePageChange}
       />
     </>
   );

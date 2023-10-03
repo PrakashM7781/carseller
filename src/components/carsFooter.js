@@ -1,8 +1,10 @@
 import React from "react";
 import "./style/style.css";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 
 const CarsFooter = ({ currentPage, setCurrentPage }) => {
-  const totalPages = 12; // Hardcoded total number of pages (10 + 2)
+  const totalPages = 12;
 
   const pageNumbers = Array.from(
     { length: totalPages },
@@ -14,7 +16,7 @@ const CarsFooter = ({ currentPage, setCurrentPage }) => {
       <div className="container pagination">
         {currentPage > 1 && (
           <div className="btn" onClick={() => setCurrentPage(currentPage - 1)}>
-            Previous
+            <ArrowBackOutlinedIcon />
           </div>
         )}
 
@@ -30,7 +32,7 @@ const CarsFooter = ({ currentPage, setCurrentPage }) => {
 
         {currentPage < totalPages && (
           <div className="btn" onClick={() => setCurrentPage(currentPage + 1)}>
-            Next
+            <ArrowForwardOutlinedIcon />
           </div>
         )}
       </div>

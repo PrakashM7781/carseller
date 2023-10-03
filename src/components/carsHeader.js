@@ -1,14 +1,20 @@
 import React from "react";
 import "./style/style.css";
 
-const CarsHeader = () => {
+const CarsHeader = ({ searchQuery, setSearchQuery }) => {
   return (
     <>
-      <section class="navigatioupper">
-        <div class="container">
-          <nav class="upper">
-            <input type="text" placeholder="Search... " class="search-input" />
-            <i class="fas fa-search search-icon"></i>
+      <section className="navigatioupper">
+        <div className="container">
+          <nav className="upper">
+            <input
+              type="text"
+              placeholder="Search... "
+              className="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <i className="fas fa-search search-icon"></i>
           </nav>
         </div>
       </section>
