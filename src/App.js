@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CarsList from "./components/carsList";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-function App() {
+const App = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <h1>Car List</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <CarsList currentPage={currentPage} itemsPerPage={itemsPerPage} />
+            }
+          />
+          {/* Add more routes here if needed */}
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
