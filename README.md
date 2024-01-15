@@ -40,9 +40,7 @@ npm start
 
 
 
-## Appendix
 
-Any additional information goes here
 
 
 ## Demo
